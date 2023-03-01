@@ -1,9 +1,19 @@
 package com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces;
 
+import com.demo.spring.boot.SpringBootArtifactDemo.dto.DriverDTO;
 import com.demo.spring.boot.SpringBootArtifactDemo.entities.Driver;
 
-public interface DriverService {
-    Driver getDriverById(int id);
+import java.util.List;
 
-    Driver createDriver(Driver driver);
+public interface DriverService {
+
+    List<DriverDTO> getAllDrivers();
+
+    DriverDTO getDriverById(int id);
+
+    DriverDTO createDriver(DriverDTO driverDTO);
+
+    DriverDTO updateDriver(int id, DriverDTO driverDTO);
+
+    void deleteDriver(int id);
 }
