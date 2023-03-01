@@ -1,0 +1,173 @@
+
+
+
+                                   +---------------+       +------------------+       +-----------------+
+                                   |  Controller   |       |      Service     |       |    Repository   |
+                                   | (API Endpoints)|       | (Business Logic) |       |  (Data Access)  |
+                                   +---------------+       +------------------+       +-----------------+
+                                          |                         |                           |
+                                          |                         |                           |
+                                          |            +--------------------------+             |
+                                          |            |           DTOs           |             |
+                                          |            |(Data Transfer Objects)   |             |
+                                          |            +--------------------------+             |
+                                          |                         |                           |
+                                          |         +---------------------------+              |
+                                          +-------->|          Entity           |<-------------+
+                                                    | (Persistent Data Object)   |
+                                                    +---------------------------+
+                                                                 |
+                                                                 |
+                                                    +---------------------------+
+                                                    |         Database          |
+                                                    |       (Data Storage)       |
+                                                    +---------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       +------------+
+                       |    Client  |
+                       +------------+
+                              |                 Dans ce schéma, l'ordre de communication est le suivant :
+                   +-------------------+            Le client envoie une requête HTTP au controller.
+                   |    Controller     |            Le controller reçoit la requête et la traite.
+                   +-------------------+            Le controller utilise le service pour gérer la logique métier de l'application.
+                              |                     Le service utilise le mapper pour convertir les objets DTO en objets de domaine (Entity) et vice versa.
+                              |                     Le service utilise le repository pour accéder aux données dans la base de données.
+                   +-------------------+
+                   |       Service     |            Le repository interagit avec la base de données pour récupérer ou modifier les données.
+                   +-------------------+            Le repository renvoie les données au service.
+                              |                     Le service utilise le mapper pour convertir les objets de domaine en objets DTO.
+                   +-------------------+
+                   |        DTO        |            Le service renvoie les objets DTO au controller.
+                   +-------------------+            Le controller utilise les objets DTO pour générer une réponse HTTP et la renvoie au client.
+                              |                   En suivant cet ordre de communication, chaque couche est responsable de ses propres tâches et ne dépend pas des autres couches.
+                   +-------------------+            Cette approche permet une meilleure modularité, une meilleure réutilisabilité et une meilleure maintenabilité du code.
+                   |       Mapper      |
+                   +-------------------+
+                              |
+                   +-------------------+
+                   |     Repository    |
+                   +-------------------+
+                              |
+                   +-------------------+
+                   |       Entity      |
+                   +-------------------+
+                              |
+                   +-------------------+
+                   |     Database      |
+                   +-------------------+
+
+
+
+    +-------------+      +----------------+         +----------------+
+    |  Client     |      |    Controller  |         |      Service   |
+    +-------------+      +----------------+         +----------------+
+               |                      |                           |
+               | HTTP Request/Response|                           |
+               |--------------------> |                           |      La couche Client envoie une requête HTTP contenant les informations de l'objet User. Cette couche est responsable de la validation des données saisies par l'utilisateur.
+               |                      |  Calls Service            |
+               |                      |-------------------------->|
+               |                      |    Uses Mapper            |      La couche Controller reçoit la requête HTTP envoyée par la couche Client et vérifie les données saisies. Elle utilise ensuite la couche Service pour effectuer les opérations CRUD nécessaires sur l'objet User.
+               |                      |-------------------------->|
+               |                      |    Calls Repository       |      La couche Service contient la logique métier de l'application. Elle est responsable de la manipulation des données de l'objet User en utilisant la couche Mapper pour convertir les objets DTO en objets Entity et vice versa.
+               |                      |-------------------------->|
+               |                      |    Calls Database         |      La couche Mapper est responsable de la conversion entre les objets DTO et les objets Entity. Elle permet de transférer les données entre la couche Service et la couche Repository.
+               |                      |-------------------------->|
+
+    +-------------+        +----------------+         +----------------+
+    |   DTO       |        |    Mapper      |         |    Repository  |     La couche Repository est responsable de l'accès aux données de l'objet User. Elle utilise la couche Mapper pour convertir les objets Entity en objets DTO et vice versa.
+    +-------------+        +----------------+         +----------------+
+              |                       |                           |
+              |  Maps Data            |                           |          Enfin, la couche Entity représente l'objet User tel qu'il est stocké dans la base de données. Elle est gérée par la couche Repository.
+              |<----------------------|                           |
+              |                       |                           |
+              |                       |  Converts Entity to DTO   |
+              |                       |-------------------------->|
+              |                       |                           |
+              |                       |  Converts DTO to Entity   |
+              |                       |<--------------------------|
+              |                       |                           |
+
+
+
+
+
+
+
+
+                      +---------+       +-------------+
+                      |  Client |       |   Control   |
+                      +---------+       +-------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            |      +------------+-------+
+                            |      |  UserDTO          |
+                            |      +------------------+
+                            |      |  userId           |
+                            |      |  username         |
+                            |      |  email            |
+                            |      |  password         |
+                            |      +------------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            |      +------------+-------+
+                            |      |   UserService     |
+                            |      +------------------+
+                            |      |  createUser       |
+                            |      |  updateUser       |
+                            |      |  deleteUser       |
+                            |      |  getUserById      |
+                            |      |  getAllUsers      |
+                            |      +------------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            |      +------------+-------+
+                            |      |    UserEntity     |
+                            |      +------------------+
+                            |      |  userId           |
+                            |      |  username         |
+                            |      |  email            |
+                            |      |  password         |
+                            |      +------------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            |      +------------+-------+
+                            |      |   UserRepository |
+                            |      +------------------+
+                            |      |  save             |
+                            |      |  findById         |
+                            |      |  deleteById       |
+                            |      |  findAll          |
+                            |      +------------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            |      +------------+-------+
+                            |      |    Database       |
+                            |      +------------------+
+                            |                   |
+                            |                   |
+                            |                   |
+                            +------------------>+
