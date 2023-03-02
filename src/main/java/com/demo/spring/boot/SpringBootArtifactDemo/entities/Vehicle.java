@@ -9,8 +9,8 @@ import lombok.Setter;
     @Setter
     @AllArgsConstructor
     public class Vehicle {
-        private int id;
-        private int capacity;
+        private Long id;
+        private Long capacity;
         private Driver driver;
     }
 

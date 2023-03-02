@@ -5,7 +5,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.repositories.VehicleRepositor
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class VehicleServiceImpl implements VehicleService {
     private final VehicleRepository vehicleRepository;
 
@@ -14,7 +14,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle getVehicleById(int id) {
+    public Vehicle getVehicleById(Long id) {
         return vehicleRepository.findById(id).orElse(null);
     }
 

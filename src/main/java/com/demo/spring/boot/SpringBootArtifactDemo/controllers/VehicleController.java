@@ -15,7 +15,7 @@ public class VehicleController {
 
     // Endpoint pour récupérer un véhicule par son ID
     @GetMapping("/{id}")
-    public Vehicle getVehicleById(@PathVariable int id) {
+    public Vehicle getVehicleById(@PathVariable Long id) {
         return vehicleService.getVehicleById(id);
     }
 

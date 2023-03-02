@@ -5,6 +5,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.exceptions.CityAlreadyExistsE
 import com.demo.spring.boot.SpringBootArtifactDemo.exceptions.CityNotFoundException;
 import com.demo.spring.boot.SpringBootArtifactDemo.repositories.CityRepository;
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.CityService;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 
@@ -34,7 +35,7 @@ public class CityServiceImpl implements CityService {
 
     // Méthode pour récupérer une ville par son ID
     @Override
-    public City getCityById(Integer id) {
+    public City getCityById(Long id) {
         // Vérifier si la ville existe dans la base de données
         Optional<City> city = cityRepository.findById(id);
         if (city.isPresent()) {
@@ -46,15 +47,17 @@ public class CityServiceImpl implements CityService {
 
     // Méthode pour mettre à jour une ville existante
     @Override
-    public City updateCity(Integer id, City updatedCity) {
+    public City updateCity(Long id, City updatedCity) {
         // Vérifier si la ville existe dans la base de données
         Optional<City> city = cityRepository.findById(id);
         if (city.isPresent()) {
             // Vérifier si une autre ville existe déjà avec le même nom
-            City existingCity = cityRepository.findByName(updatedCity.getName());
-            if (existingCity != null && !existingCity.getId().equals(id)) {
+
+            Optional<City> existingCity = cityRepository.findByName(updatedCity.getName());
+            if (existingCity.isPresent() && !existingCity.get().getId().equals(id)) {
                 throw new CityAlreadyExistsException("Une autre ville avec le nom " + updatedCity.getName() + " existe déjà.");
             }
+
             // Mettre à jour les attributs de la ville existante
             City cityToUpdate = city.get();
             cityToUpdate.setName(updatedCity.getName());
@@ -69,7 +72,7 @@ public class CityServiceImpl implements CityService {
 
     // Méthode pour supprimer une ville existante
     @Override
-    public void deleteCityById(Integer id) {
+    public void deleteCityById(Long id) {
         // Vérifier si la ville existe dans la base de données
         if (cityRepository.existsById(id)) {
             // Supprimer la ville de la base de données

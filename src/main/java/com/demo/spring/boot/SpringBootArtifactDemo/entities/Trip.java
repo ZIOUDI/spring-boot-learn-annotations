@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Trip {
-    private int id;
+public class Trip  /* voyage */{
+    private Long id;
     private LocalDateTime departureDateTime;
     private City departureCity;
     private City destinationCity;

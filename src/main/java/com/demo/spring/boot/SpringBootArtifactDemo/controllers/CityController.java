@@ -30,7 +30,7 @@ public class CityController {
 
     // Endpoint pour récupérer une ville par son id
     @GetMapping("/{id}")
-    public CityDTO getCityById(@PathVariable Integer id) throws CityNotFoundException {
+    public CityDTO getCityById(@PathVariable Long id) throws CityNotFoundException {
         City city = cityService.getCityById(id);
         return cityMapper.toDto(city);
     }
@@ -45,7 +45,7 @@ public class CityController {
 
     // Endpoint pour mettre à jour une ville existante
     @PutMapping("/{id}")
-    public CityDTO updateCity(@PathVariable Integer id, @RequestBody CityDTO cityDTO) throws CityNotFoundException {
+    public CityDTO updateCity(@PathVariable Long id, @RequestBody CityDTO cityDTO) throws CityNotFoundException {
         City cityToUpdate = cityService.getCityById(id);
         City city = cityMapper.toEntity(cityDTO);
         city.setId(cityToUpdate.getId());
@@ -55,7 +55,7 @@ public class CityController {
 
     // Endpoint pour supprimer une ville existante
     @DeleteMapping("/{id}")
-    public void deleteCity(@PathVariable Integer id) throws CityNotFoundException {
+    public void deleteCity(@PathVariable Long id) throws CityNotFoundException {
         cityService.deleteCityById(id);
     }
 }

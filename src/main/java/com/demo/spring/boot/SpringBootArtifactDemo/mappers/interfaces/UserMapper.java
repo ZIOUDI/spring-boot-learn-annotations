@@ -30,8 +30,13 @@ public interface UserMapper {
             @Mapping(target = "firstName", source = "user.firstName"),
             @Mapping(target = "lastName", source = "user.lastName")
     })
-     UserDto toUserDto(User user);
-
+    static UserDto toUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setEmail(user.getEmail());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        return userDto;
+    }
     @Mappings({
             @Mapping(target = "email", source = "userDto.email"),
             @Mapping(target = "firstName", source = "userDto.firstName"),

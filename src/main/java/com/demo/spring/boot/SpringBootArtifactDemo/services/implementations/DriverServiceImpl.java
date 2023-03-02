@@ -12,7 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 public class DriverServiceImpl implements DriverService {
 
     @Autowired
@@ -51,6 +51,6 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public void deleteDriverById(Long id) {
-        driverRepository.deleteById(Math.toIntExact(id));
+        driverRepository.deleteById(id);
     }
 }

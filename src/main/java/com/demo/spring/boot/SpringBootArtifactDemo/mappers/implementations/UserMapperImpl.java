@@ -19,8 +19,9 @@ import org.springframework.stereotype.Service;
 
  */
 //@Service  //  l'annotation "@Service" pour indiquer que c'est une classe de service.
-public class UserMapperImpl implements UserMapper {
+public class UserMapperImpl   {
 
+    /*
     @Override
     public User toUser(UserDto userDto) {
         User user = new User();
@@ -51,5 +52,5 @@ public class UserMapperImpl implements UserMapper {
         if (userDto.getLastName() != null) {
             user.setLastName(userDto.getLastName());
         }
-    }
+    }*/
 }

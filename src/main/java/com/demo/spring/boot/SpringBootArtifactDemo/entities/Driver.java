@@ -33,6 +33,7 @@ public class Driver {
     // @Min(value = 18, message = "Driver's age must be at least 18")
     private String phoneNumber;
     private String email;
+    
 
     // @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trip> trips;
@@ -47,6 +48,9 @@ public class Driver {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public void setLicenseNumber(String abc123) {
     }
 
     public static class Builder {

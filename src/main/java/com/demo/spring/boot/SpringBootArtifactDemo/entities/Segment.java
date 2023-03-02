@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Segment {
-    private int id;
+    private Long id;
     private City departureCity;
     private City arrivalCity;
     private Vehicle vehicle;

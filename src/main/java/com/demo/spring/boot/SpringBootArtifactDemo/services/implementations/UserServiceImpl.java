@@ -4,7 +4,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.dto.UserDto;
 import com.demo.spring.boot.SpringBootArtifactDemo.entities.User;
 import com.demo.spring.boot.SpringBootArtifactDemo.mappers.interfaces.UserMapper;
 import com.demo.spring.boot.SpringBootArtifactDemo.repositories.UserRepository;
-import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.UserService;
+import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.UserService ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;

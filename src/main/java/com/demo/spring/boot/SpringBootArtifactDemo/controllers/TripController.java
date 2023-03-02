@@ -15,7 +15,7 @@ public class TripController {
 
     // Endpoint pour récupérer un voyage par son ID
     @GetMapping("/{id}")
-    public Trip getTripById(@PathVariable int id) {
+    public Trip getTripById(@PathVariable Long id) {
         return tripService.getTripById(id);
     }
 

@@ -20,9 +20,9 @@ public class City {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private int reference;
+    private Long reference;
     private String name;
     private String country;
 
@@ -32,7 +32,7 @@ public class City {
     @OneToMany(mappedBy = "endCity")
     private List<Trip> tripsTo;
 
-    public City(int reference, String name, String country) {
+    public City(Long reference, String name, String country) {
         this.reference = reference;
         this.name = name;
         this.country = country;

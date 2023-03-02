@@ -5,7 +5,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.repositories.TripRepository;
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.TripService;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class TripServiceImpl implements TripService {
     private final TripRepository tripRepository;
 
@@ -14,7 +14,7 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Trip getTripById(int id) {
+    public Trip getTripById(Long id) {
         return tripRepository.findById(id).orElse(null);
     }
 
