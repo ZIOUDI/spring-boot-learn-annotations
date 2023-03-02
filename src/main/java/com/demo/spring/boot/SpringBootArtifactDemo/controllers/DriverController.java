@@ -2,81 +2,76 @@ package com.demo.spring.boot.SpringBootArtifactDemo.controllers;
 
 import com.demo.spring.boot.SpringBootArtifactDemo.dto.DriverDTO;
 import com.demo.spring.boot.SpringBootArtifactDemo.entities.Driver;
+import com.demo.spring.boot.SpringBootArtifactDemo.mappers.interfaces.DriverMapper;
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.DriverService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/api/drivers")
 public class DriverController {
 
-    private final DriverService driverService;
+    @Autowired
+    private DriverService driverService;
 
-    public DriverController(DriverService driverService) {
-        this.driverService = driverService;
-    }
+    @Autowired
+    private DriverMapper driverMapper;
 
-    /**
-     * Cette méthode renvoie une liste de tous les conducteurs.
-     *
-     * @return une liste de DriverDTO représentant tous les conducteurs
-     */
+    // Endpoint pour récupérer tous les conducteurs
     @GetMapping
     public List<DriverDTO> getAllDrivers() {
-        List<DriverDTO> drivers = driverService.getAllDrivers();
-        return drivers;
+         return driverService.getAllDrivers();
     }
 
-    /**
-     * Cette méthode renvoie un conducteur spécifique en utilisant son ID.
-     *
-     * @param id l'ID du conducteur à récupérer
-     * @return un DriverDTO représentant le conducteur spécifique
-     * @throws java.util.NoSuchElementException si le conducteur n'est pas trouvé
-     */
+    // Endpoint pour récupérer un conducteur par son identifiant
     @GetMapping("/{id}")
-    public DriverDTO getDriverById(@PathVariable int id) {
-        DriverDTO driver = driverService.getDriverById(id);
-        return driver;
+    public ResponseEntity<Optional<Driver>> getDriverById(@PathVariable Long id) {
+        Optional<Driver> driverDTO  = driverService.getDriverById(id);
+        if (driverDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+         return ResponseEntity.ok(driverDTO);
     }
 
-    /**
-     * Cette méthode ajoute un nouveau conducteur à la base de données.
-     *
-     * @param driverDTO un DriverDTO représentant le nouveau conducteur
-     * @return un DriverDTO représentant le conducteur ajouté
-     */
+    // Endpoint pour créer un nouveau conducteur
     @PostMapping
-    public DriverDTO addDriver(@RequestBody DriverDTO driverDTO) {
-        DriverDTO newDriver = driverService.createDriver(driverDTO);
-        return newDriver;
+    public ResponseEntity<DriverDTO> createDriver(@RequestBody DriverDTO driverDTO) {
+        Driver driver = driverMapper.toEntity(driverDTO);     // Conversion du DTO en entité OK
+        Driver createdDriver = driverService.createDriver(driver);          // Appel de la méthode de création du driver dans la couche Service
+        driverDTO = driverMapper.toDto(createdDriver);              // Conversion de l'entité en DTO
+
+        // Retour de la réponse avec le DTO du driver créé
+        return ResponseEntity.status(HttpStatus.CREATED).body(driverDTO);
     }
 
-    /**
-     * Cette méthode met à jour les informations d'un conducteur spécifique en utilisant son ID.
-     *
-     * @param id l'ID du conducteur à mettre à jour
-     * @param driverDTO un DriverDTO représentant les nouvelles informations du conducteur
-     * @return un DriverDTO représentant le conducteur mis à jour
-     * @throws java.util.NoSuchElementException si le conducteur n'est pas trouvé
-     */
+    // Endpoint pour mettre à jour un conducteur existant
     @PutMapping("/{id}")
-    public DriverDTO updateDriver(@PathVariable int id, @RequestBody DriverDTO driverDTO) {
-        DriverDTO updatedDriver = driverService.updateDriver(id, driverDTO);
-        return updatedDriver;
+    public ResponseEntity<DriverDTO> updateDriver(@PathVariable Long id, @RequestBody DriverDTO driverDTO) {
+        Optional<Driver> existingDriver = driverService.getDriverById(id);
+        if (existingDriver == null) {
+            return ResponseEntity.notFound().build();
+        }
+        Driver driver = driverMapper.toEntity(driverDTO);
+        driver.setId(id);
+        driver = driverService.updateDriver(id, driver);
+        driverDTO = driverMapper.toDto(driver);
+        return ResponseEntity.ok(driverDTO);
     }
 
-    /**
-     * Cette méthode supprime un conducteur spécifique en utilisant son ID.
-     *
-     * @param id l'ID du conducteur à supprimer
-     * @throws java.util.NoSuchElementException si le conducteur n'est pas trouvé
-     */
+    // Endpoint pour supprimer un conducteur existant
     @DeleteMapping("/{id}")
-    public void deleteDriver(@PathVariable int id) {
-        driverService.deleteDriver(id);
+    public ResponseEntity<Void> deleteDriver(@PathVariable Long id) {
+        Optional<Driver> existingDriver = driverService.getDriverById(id);
+        if (existingDriver == null) {
+            return ResponseEntity.notFound().build();
+        }
+        driverService.deleteDriverById(id);
+        return ResponseEntity.noContent().build();
     }
 }
-
