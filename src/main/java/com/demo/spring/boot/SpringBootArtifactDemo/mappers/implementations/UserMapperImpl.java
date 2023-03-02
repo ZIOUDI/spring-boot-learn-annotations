@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
   Voici un exemple d'implémentation pour l'interface UserMapper
 
  */
-//@Service  //  l'annotation "@Service" pour indiquer que c'est une classe de service.
+@Service  //  l'annotation "@Service" pour indiquer que c'est une classe de service.
 public class UserMapperImpl   {
 
     /*

@@ -12,7 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-//@Service
+@Service
 public class DriverServiceImpl implements DriverService {
 
     @Autowired

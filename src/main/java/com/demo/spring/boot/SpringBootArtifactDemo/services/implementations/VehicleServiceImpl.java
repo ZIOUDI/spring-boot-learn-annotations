@@ -5,7 +5,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.repositories.VehicleRepositor
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.VehicleService;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class VehicleServiceImpl implements VehicleService {
     private final VehicleRepository vehicleRepository;
 

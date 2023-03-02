@@ -5,7 +5,7 @@ import com.demo.spring.boot.SpringBootArtifactDemo.repositories.TripRepository;
 import com.demo.spring.boot.SpringBootArtifactDemo.services.interfaces.TripService;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class TripServiceImpl implements TripService {
     private final TripRepository tripRepository;
 
