@@ -1,6 +1,6 @@
 package com.demo.spring.boot.VehicleTransportSystem.entities;
 
-import jakarta.persistence.Column;
+import javax.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
