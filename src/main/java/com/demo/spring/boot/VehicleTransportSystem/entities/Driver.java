@@ -6,36 +6,40 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 //import javax.persistence.*;
 import java.util.List;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 
+@Entity
+@Table(name = "driver")
 public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    // @NotBlank(message = "Driver's first name cannot be blank")
+
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
-    // @NotNull(message = "Driver's age cannot be null")
-    // @Min(value = 18, message = "Driver's age must be at least 18")
+
+
     private String phoneNumber;
     private String email;
-    
+
+
+
 
     // @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trip> trips;
-
+    @OneToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 
     public Driver(String phoneNumber, String firstName, String lastName) {
         this.phoneNumber = phoneNumber;

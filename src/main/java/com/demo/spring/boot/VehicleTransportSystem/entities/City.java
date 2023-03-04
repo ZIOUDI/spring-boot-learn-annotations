@@ -8,12 +8,14 @@ import lombok.*;
 import java.util.List;
 
 
-@Entity
+
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "city")
 public class City {
     /*
      name (nom de la ville), country (nom du pays), latitude (latitude de la ville) et longitude (longitude de la ville).
@@ -21,8 +23,9 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false)
     private Long reference;
+    @Column(nullable = false)
     private String name;
     private String country;
 
