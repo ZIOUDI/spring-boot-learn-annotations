@@ -1,150 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-
-	<!-- xmlns:cobertura="http://cobertura.sourceforge.net" -->
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		 					 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 
-	<!-- Informations générales sur le projet -->
+	  <modelVersion>4.0.0</modelVersion>
+
+<!-- Informations générales sur le projet -->
 		<groupId>com.demo.spring.boot</groupId>
 		<artifactId>Vehicle-Transport-System</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<name>Spring-Boot-Artifact-Demo</name>
 		<description>Demo project for Spring Boot</description>
 		<packaging>jar</packaging>
-	<!-- Configuration du compilateur pour Java 19 -->
-	<properties>
-		<maven.compiler.source>19</maven.compiler.source>
-		<maven.compiler.target>19</maven.compiler.target>
 
-		<slf4j.version>1.7.32</slf4j.version>
-		<logback.version>1.2.6</logback.version>
 
-	</properties>
 
-	<!-- Dépendances -->
+
 	<dependencies>
 
-		<!-- Spring Boot -->
+
+		<!-- Starter pour Spring Boot -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-			<version>3.0.3</version>
+			<version>2.6.3</version>
 		</dependency>
 
-		<!-- Spring Web -->
+		<!-- Starter pour Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>3.0.3</version>
+			<version>2.6.3</version>
 		</dependency>
 
-		<!-- Spring Data JPA -->
-	<!--	<dependency>
+		<!-- Starter pour Spring Boot Data JPA -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>3.0.3</version>
-		</dependency>-->
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-			<version>3.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>3.0.2</version>
+			<version>2.6.3</version>
 		</dependency>
 
+		<!-- Starter pour Spring Boot Actuator -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>2.6.3</version>
+		</dependency>
 
+		<!-- Starter pour Spring Boot Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>2.6.3</version>
+			<scope>test</scope>
+		</dependency>
 
-
-		<!-- Logging avec SLF4J -->
+		<!-- DevTools pour Spring Boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>2.6.3</version>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- SLF4J API -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
+			<version>1.7.32</version>
 		</dependency>
 
 		<!-- Logback Classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
+			<version>1.2.10</version>
 		</dependency>
-
 
 		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
+			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Hibernate -->
+		<!-- Hibernate Core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.6.4.Final</version>
+			<version>5.6.3.Final</version>
 		</dependency>
 
 		<!-- MapStruct -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
-			<version>1.4.2.Final</version>
-		</dependency>
-
-		<!-- Java Persistence API -->
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>javax.persistence-api</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<!-- Spring Boot Actuator -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>3.0.3</version>
-		</dependency>
-
-		<!-- Swagger UI -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-boot-starter</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
-
-
-
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
-
-		<!-- Tests -->
-
-		<!-- Tests -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<version>3.0.1</version>
-			<scope>test</scope>
+			<version>1.5.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -152,26 +106,23 @@
 			<version>6.0.2</version>
 		</dependency>
 
+		<!-- Dépendance pour MySQL Connector/J -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.12.4</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.28</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<version>2.6.3</version>
- 			<optional>true</optional>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.3.1</version>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
 		</dependency>
-
-
 
 
 

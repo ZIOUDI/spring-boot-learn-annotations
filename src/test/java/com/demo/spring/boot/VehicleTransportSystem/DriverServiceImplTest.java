@@ -1,7 +1,7 @@
-package com.demo.spring.boot.VehicleTransportSystem;
+package com.demo.spring.boot.VehicleTransportSystem.mainApplication;
 
-import com.demo.spring.boot.VehicleTransportSystem.repositories.DriverRepository;
-import com.demo.spring.boot.VehicleTransportSystem.services.implementations.DriverServiceImpl;
+import com.demo.spring.boot.VehicleTransportSystem.mainApplication.repositories.DriverRepository;
+import com.demo.spring.boot.VehicleTransportSystem.mainApplication.services.implementations.DriverServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
